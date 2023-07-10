@@ -1,12 +1,10 @@
 module RecordInvocation
   Error = ::Class.new(RuntimeError)
 
-  attr_writer :__records
   def __records
     @__records ||= []
   end
   alias :records :__records
-  alias :records= :__records=
 
   ## Consider `record_invocation`, rather than `record` - Antoine, Sun Jul 9 2023
   def __record(invocation)
