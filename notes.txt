@@ -2,7 +2,7 @@ Notes
 
 - record_invocation(binding)
 
-- macro
+- macro:
 
   recorded :some_method do |p1, p2, ...|
     return :some_result

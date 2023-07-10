@@ -10,6 +10,7 @@ require_relative '../init.rb'
 
 require 'test_bench'; TestBench.activate
 require 'securerandom'
+require 'pp'
 
 include RecordInvocation
 require 'record_invocation/controls'

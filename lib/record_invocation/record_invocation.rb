@@ -1,16 +1,28 @@
 module RecordInvocation
   Error = ::Class.new(RuntimeError)
 
+## Change to __invocations and invocations
   def __records
     @__records ||= []
   end
   alias :records :__records
 
-  ## Consider `record_invocation`, rather than `record` - Antoine, Sun Jul 9 2023
   def __record(invocation)
     __records << invocation
+    records
   end
   alias :record :__record
+
+  def __record_invocation(invocation_or_binding)
+    if invocation_or_binding.is_a?(Binding)
+      invocation = Invocation.build(invocation_or_binding)
+    end
+
+
+    __record(invocation)
+    invocation
+  end
+  alias :record_invocation :__record_invocation
 
   def __invocation(method_name, **parameters)
     strict = parameters.delete(:strict)

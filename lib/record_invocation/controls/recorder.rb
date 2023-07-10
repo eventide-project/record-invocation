@@ -7,6 +7,10 @@ module RecordInvocation
 
       class Example
         include ::RecordInvocation
+
+        def some_method
+          record_invocation(binding)
+        end
       end
     end
   end
