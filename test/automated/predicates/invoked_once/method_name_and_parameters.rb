@@ -9,7 +9,7 @@ context "Predicate" do
         context "Matched Parameters" do
           context "One Recorded" do
             context "One Parameter Match" do
-              record_invocation = Controls::RecordInvocation.example
+              record_invocation = Controls::Recorder.example
 
               record_invocation.record(invocation)
 
@@ -28,7 +28,7 @@ context "Predicate" do
             end
 
             context "Multiple Parameters Match" do
-              record_invocation = Controls::RecordInvocation.example
+              record_invocation = Controls::Recorder.example
 
               record_invocation.record(invocation)
 
@@ -48,7 +48,7 @@ context "Predicate" do
           end
 
           context "Multiple Recorded" do
-            record_invocation = Controls::RecordInvocation.example
+            record_invocation = Controls::Recorder.example
 
             record_invocation.record(invocation)
             record_invocation.record(invocation)
@@ -69,7 +69,7 @@ context "Predicate" do
         end
 
         context "Mismatched Parameters" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
 
@@ -89,7 +89,7 @@ context "Predicate" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::RecordInvocation.example
+        record_invocation = Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }

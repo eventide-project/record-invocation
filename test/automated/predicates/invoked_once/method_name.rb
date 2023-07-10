@@ -8,7 +8,7 @@ context "Predicate" do
       context "Recorded" do
         context "Matched Method Name" do
           context "One Recorded" do
-            record_invocation = Controls::RecordInvocation.example
+            record_invocation = Controls::Recorder.example
 
             record_invocation.record(invocation)
 
@@ -20,7 +20,7 @@ context "Predicate" do
           end
 
           context "Multiple Recorded" do
-            record_invocation = Controls::RecordInvocation.example
+            record_invocation = Controls::Recorder.example
 
             record_invocation.record(invocation)
             record_invocation.record(invocation)
@@ -34,7 +34,7 @@ context "Predicate" do
         end
 
         context "Mismatched" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
 
@@ -47,7 +47,7 @@ context "Predicate" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::RecordInvocation.example
+        record_invocation = Controls::Recorder.example
 
         detected = record_invocation.invoked_once?(invocation.method_name)
 

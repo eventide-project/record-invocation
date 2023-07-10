@@ -7,7 +7,7 @@ context "Predicates" do
 
       context "Recorded" do
         context "Matched Method Name" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
 
@@ -19,7 +19,7 @@ context "Predicates" do
         end
 
         context "Mismatched Method Name" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
 
@@ -32,7 +32,7 @@ context "Predicates" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::RecordInvocation.example
+        record_invocation = Controls::Recorder.example
 
         detected = record_invocation.invoked?(invocation.method_name)
 

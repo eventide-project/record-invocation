@@ -6,7 +6,7 @@ context "Query" do
       invocation = Controls::Invocation.example
 
       context "Recorded" do
-        record_invocation = Controls::RecordInvocation.example
+        record_invocation = Controls::Recorder.example
 
         record_invocation.record(invocation)
         record_invocation.record(invocation)
@@ -19,7 +19,7 @@ context "Query" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::RecordInvocation.example
+        record_invocation = Controls::Recorder.example
 
         retrieved_invocations = record_invocation.invocations
 

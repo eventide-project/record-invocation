@@ -8,7 +8,7 @@ context "Queries" do
       context "Recorded One" do
         context "Matched Parameters" do
           context "One Parameter Match" do
-            record_invocation = Controls::RecordInvocation.example
+            record_invocation = Controls::Recorder.example
 
             record_invocation.record(invocation)
 
@@ -23,7 +23,7 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            record_invocation = Controls::RecordInvocation.example
+            record_invocation = Controls::Recorder.example
 
             record_invocation.record(invocation)
 
@@ -44,7 +44,7 @@ context "Queries" do
 
         context "Matched Parameters" do
           context "One Parameter Match" do
-            record_invocation = Controls::RecordInvocation.example
+            record_invocation = Controls::Recorder.example
 
             record_invocation.record(invocation)
             record_invocation.record(other_invocation)
@@ -60,7 +60,7 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            record_invocation = Controls::RecordInvocation.example
+            record_invocation = Controls::Recorder.example
 
             record_invocation.record(invocation)
             record_invocation.record(other_invocation)
@@ -79,7 +79,7 @@ context "Queries" do
 
       context "Recorded" do
         context "No Parameters Match" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
 
@@ -95,7 +95,7 @@ context "Queries" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::RecordInvocation.example
+        record_invocation = Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }

@@ -7,7 +7,7 @@ context "Queries" do
 
       context "Recorded One" do
         context "Matched Method Name" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
 
@@ -19,7 +19,7 @@ context "Queries" do
         end
 
         context "Mismatched Method Name" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
 
@@ -35,7 +35,7 @@ context "Queries" do
         other_invocation = Controls::Invocation.example
 
         context "Matched Method Name" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
           record_invocation.record(other_invocation)
@@ -49,7 +49,7 @@ context "Queries" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::RecordInvocation.example
+        record_invocation = Controls::Recorder.example
 
         retrieved_invocation = record_invocation.invocation(SecureRandom.hex)
 

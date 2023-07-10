@@ -7,7 +7,7 @@ context "Predicates" do
 
       context "Strict" do
         context "By Method Name" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
           record_invocation.record(invocation)
@@ -20,7 +20,7 @@ context "Predicates" do
         end
 
         context "By Parameters" do
-          record_invocation = Controls::RecordInvocation.example
+          record_invocation = Controls::Recorder.example
 
           record_invocation.record(invocation)
           record_invocation.record(invocation)
