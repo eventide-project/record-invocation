@@ -1,0 +1,9 @@
+Notes
+
+- record_invocation(binding)
+
+- macro
+
+  recorded :some_method do |p1, p2, ...|
+    return :some_result
+  end
