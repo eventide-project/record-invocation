@@ -18,7 +18,6 @@ module RecordInvocation
       invocation = Invocation.build(invocation_or_binding)
     end
 
-
     __record(invocation)
     invocation
   end

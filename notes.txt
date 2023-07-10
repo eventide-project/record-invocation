@@ -7,3 +7,5 @@ Notes
   recorded :some_method do |p1, p2, ...|
     return :some_result
   end
+
+- Documentation
