@@ -3,7 +3,7 @@ module RecordInvocation
 
   def self.included(cls)
     cls.class_exec do
-      extend Recorded
+      extend Record
     end
   end
 
@@ -99,14 +99,45 @@ module RecordInvocation
   end
   alias :invoked_once? :__invoked_once?
 
-  module Recorded
-    def recorded_macro(method_name, &implementation)
+  module Record
+    def record_module
+      @record_module ||= prepend_record_module
+    end
 
-      define_method(method_name) do |*args, **kwargs|
-        record_invocation(binding)
-        implementation.call(*args, **kwargs)
+    def prepend_record_module
+      mod = Module.new
+      prepend mod
+      mod
+    end
+
+    def record_macro(method_name, &blk)
+      record_module.define_method(method_name) do |*args, **kwargs, &block|
+        parameters = method(method_name).super_method.parameters
+
+        arguments = {}
+        parameters.each_with_index do |(type, name), index|
+          case type
+          when :req, :opt
+            if index <= args.length
+              arguments[name] = args[index]
+            end
+          when :key, :keyreq
+            if kwargs.key?(name)
+              arguments[name] = kwargs[name]
+            end
+          when :block
+            if not block.nil?
+              arguments[name] = block
+            end
+          end
+        end
+
+        invocation = Invocation.new(method_name, arguments)
+        __record(invocation)
+
+        super(*args, **kwargs, &block)
       end
     end
-    alias :recorded :recorded_macro
+    alias :record :record_macro
   end
 end

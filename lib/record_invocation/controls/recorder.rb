@@ -8,7 +8,7 @@ module RecordInvocation
       class Example
         include ::RecordInvocation
 
-        recorded :some_recorded_method do |some_parameter, some_other_parameter:|
+        record def some_recorded_method(some_parameter, some_optional_paramter=nil, some_keyword_parameter:, some_optional_keyword_parameter: nil)
           :some_result
         end
 
