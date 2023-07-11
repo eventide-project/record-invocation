@@ -116,15 +116,40 @@ module RecordInvocation
 
         arguments = {}
         parameters.each_with_index do |(type, name), index|
+pp "#{type.inspect}: #{name.inspect}"
           case type
-          when :req, :opt
+          when :req, :opt, :rest
             if index <= args.length
               arguments[name] = args[index]
             end
-          when :key, :keyreq
+          when :key, :keyreq, :keyrest
             if kwargs.key?(name)
               arguments[name] = kwargs[name]
             end
+
+
+=begin
+          when :rest
+            # if name == :*
+            #   return "*"
+            # else
+            #   return "*#{name}"
+            # end
+          when :keyrest
+            if name == :**
+              return "**"
+            else
+              return "**#{name}"
+            end
+          when :block
+            if name == :&
+              return "&"
+            else
+              return "&#{name}"
+            end
+=end
+
+
           when :block
             if not block.nil?
               arguments[name] = block
