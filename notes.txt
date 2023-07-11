@@ -1,0 +1,12 @@
+Notes
+
+- macro:
+  - support for parameters
+
+  recorded :some_method do |p1, p2, ...|
+    return :some_result
+  end
+
+- Will need to extract define_method library from mimic to enable turning a block to a method, especially with regard to parameter
+
+- Documentation

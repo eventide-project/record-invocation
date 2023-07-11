@@ -1,3 +1,3 @@
 require_relative './load_path'
 
-require 'record-invocation'
+require 'record_invocation'

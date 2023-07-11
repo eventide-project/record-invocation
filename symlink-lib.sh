@@ -1,3 +1,3 @@
 source ./library-symlinks.sh
 
-symlink_lib 'record-invocation'
+symlink_lib 'record_invocation'

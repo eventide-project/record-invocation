@@ -9,8 +9,9 @@ puts RUBY_DESCRIPTION
 require_relative '../init.rb'
 
 require 'test_bench'; TestBench.activate
-require 'securerandom'
 require 'pp'
+require 'securerandom'
 
-include RecordInvocation
-require 'record_invocation/controls'
+include Mimic
+require 'mimic/controls'
+require 'mimic/predicates'
