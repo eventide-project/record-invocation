@@ -1,7 +1,6 @@
 module RecordInvocation
   Error = ::Class.new(RuntimeError)
 
-## Change to __invocations and invocations
   def __records
     @__records ||= []
   end
