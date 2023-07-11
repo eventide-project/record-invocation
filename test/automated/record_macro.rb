@@ -1,6 +1,6 @@
 require_relative 'automated_init'
 
-context "Recorded Macro" do
+context "Record Macro" do
   recorder = Controls::Recorder.example
 
   result = recorder.some_recorded_method(:some_value, :some_optional_value, some_keyword_parameter: :some_keyword_value, some_optional_keyword_parameter: :some_optional_keyword_value)
