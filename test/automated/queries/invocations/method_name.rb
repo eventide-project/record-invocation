@@ -7,12 +7,12 @@ context "Queries" do
 
       context "Recorded Multiple" do
         context "Matched Method Name" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
-          record_invocation.record(invocation)
+          recorder.record(invocation)
+          recorder.record(invocation)
 
-          retrieved_invocations = record_invocation.invocations(invocation.method_name)
+          retrieved_invocations = recorder.invocations(invocation.method_name)
 
           context "Retrieved" do
             assert(retrieved_invocations.length == 2)
@@ -28,12 +28,12 @@ context "Queries" do
         end
 
         context "Mismatched Method Name" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
-          record_invocation.record(invocation)
+          recorder.record(invocation)
+          recorder.record(invocation)
 
-          retrieved_invocations = record_invocation.invocations(SecureRandom.hex)
+          retrieved_invocations = recorder.invocations(SecureRandom.hex)
 
           test "Not retrieved" do
             assert(retrieved_invocations.empty?)
@@ -42,9 +42,9 @@ context "Queries" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        retrieved_invocations = record_invocation.invocations(invocation.method_name)
+        retrieved_invocations = recorder.invocations(invocation.method_name)
 
         test "Not retrieved" do
           assert(retrieved_invocations.empty?)

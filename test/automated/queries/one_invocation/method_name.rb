@@ -8,11 +8,11 @@ context "Queries" do
       context "Recorded" do
         context "Matched Method Name" do
           context "One Recorded" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
+            recorder.record(invocation)
 
-            retrieved_invocation = record_invocation.one_invocation(invocation.method_name)
+            retrieved_invocation = recorder.one_invocation(invocation.method_name)
 
             test "Detected" do
               assert(retrieved_invocation == invocation)
@@ -20,25 +20,25 @@ context "Queries" do
           end
 
           context "Multiple Recorded" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
-            record_invocation.record(invocation)
+            recorder.record(invocation)
+            recorder.record(invocation)
 
             test "Is an error" do
               assert_raises(RecordInvocation::Error) do
-                record_invocation.one_invocation(invocation.method_name)
+                recorder.one_invocation(invocation.method_name)
               end
             end
           end
         end
 
         context "Mismatched" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
+          recorder.record(invocation)
 
-          retrieved_invocation = record_invocation.one_invocation(SecureRandom.hex)
+          retrieved_invocation = recorder.one_invocation(SecureRandom.hex)
 
           test "Not retrieved" do
             assert(retrieved_invocation.nil?)
@@ -47,9 +47,9 @@ context "Queries" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        retrieved_invocation = record_invocation.one_invocation(SecureRandom.hex)
+        retrieved_invocation = recorder.one_invocation(SecureRandom.hex)
 
         test "Not retrieved" do
           assert(retrieved_invocation.nil?)

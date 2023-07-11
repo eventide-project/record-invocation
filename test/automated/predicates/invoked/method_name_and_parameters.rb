@@ -8,18 +8,18 @@ context "Predicates" do
       context "Recorded" do
         context "Matched Parameters" do
           context "One Parameter Match" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
+            recorder.record(invocation)
 
             method_name = invocation.method_name
             parameters = { some_parameter: 1 }
 
-            detected = record_invocation.invoked?(method_name, **parameters)
+            detected = recorder.invoked?(method_name, **parameters)
 
             detail "Match Method Name: #{method_name.inspect}"
             detail "Match Parameters: #{parameters.inspect}"
-            detail "Recorded Invocations: #{record_invocation.records.inspect}"
+            detail "Recorded Invocations: #{recorder.records.inspect}"
 
             test "Detected" do
               assert(detected)
@@ -27,18 +27,18 @@ context "Predicates" do
           end
 
           context "Multiple Parameters Match" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
+            recorder.record(invocation)
 
             method_name = invocation.method_name
             parameters = { some_parameter: 1, some_other_parameter: 11 }
 
-            detected = record_invocation.invoked?(method_name, **parameters)
+            detected = recorder.invoked?(method_name, **parameters)
 
             detail "Match Method Name: #{method_name.inspect}"
             detail "Match Parameters: #{parameters.inspect}"
-            detail "Recorded Invocations: #{record_invocation.records.inspect}"
+            detail "Recorded Invocations: #{recorder.records.inspect}"
 
             test "Detected" do
               assert(detected)
@@ -47,18 +47,18 @@ context "Predicates" do
         end
 
         context "Mismatched Parameters" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
+          recorder.record(invocation)
 
           method_name = invocation.method_name
           parameters = { some_parameter: SecureRandom.hex }
 
-          detected = record_invocation.invoked?(method_name, **parameters)
+          detected = recorder.invoked?(method_name, **parameters)
 
           detail "Match Method Name: #{method_name.inspect}"
           detail "Match Parameters: #{parameters.inspect}"
-          detail "Recorded Invocations: #{record_invocation.records.inspect}"
+          detail "Recorded Invocations: #{recorder.records.inspect}"
 
           test "Not detected" do
             refute(detected)
@@ -67,12 +67,12 @@ context "Predicates" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }
 
-        detected = record_invocation.invoked?(method_name, **parameters)
+        detected = recorder.invoked?(method_name, **parameters)
 
         test "Not detected" do
           refute(detected)

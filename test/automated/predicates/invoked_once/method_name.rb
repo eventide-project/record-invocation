@@ -8,11 +8,11 @@ context "Predicate" do
       context "Recorded" do
         context "Matched Method Name" do
           context "One Recorded" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
+            recorder.record(invocation)
 
-            detected = record_invocation.invoked_once?(invocation.method_name)
+            detected = recorder.invoked_once?(invocation.method_name)
 
             test "Detected" do
               assert(detected)
@@ -20,25 +20,25 @@ context "Predicate" do
           end
 
           context "Multiple Recorded" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
-            record_invocation.record(invocation)
+            recorder.record(invocation)
+            recorder.record(invocation)
 
             test "Is an error" do
               assert_raises(RecordInvocation::Error) do
-                record_invocation.invoked_once?(invocation.method_name)
+                recorder.invoked_once?(invocation.method_name)
               end
             end
           end
         end
 
         context "Mismatched" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
+          recorder.record(invocation)
 
-          detected = record_invocation.invoked_once?(SecureRandom.hex)
+          detected = recorder.invoked_once?(SecureRandom.hex)
 
           test "Not detected" do
             refute(detected)
@@ -47,9 +47,9 @@ context "Predicate" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        detected = record_invocation.invoked_once?(invocation.method_name)
+        detected = recorder.invoked_once?(invocation.method_name)
 
         test "Not detected" do
           refute(detected)

@@ -7,27 +7,27 @@ context "Queries" do
 
       context "Strict" do
         context "By Method Name" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
-          record_invocation.record(invocation)
+          recorder.record(invocation)
+          recorder.record(invocation)
 
           test "Is an error" do
             assert_raises(RecordInvocation::Error) do
-              record_invocation.invocation(invocation.method_name, strict: true)
+              recorder.invocation(invocation.method_name, strict: true)
             end
           end
         end
 
         context "By Parameters" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
-          record_invocation.record(invocation)
+          recorder.record(invocation)
+          recorder.record(invocation)
 
           test "Is an error" do
             assert_raises(RecordInvocation::Error) do
-              record_invocation.invocation(invocation.method_name, some_parameter: 1, strict: true)
+              recorder.invocation(invocation.method_name, some_parameter: 1, strict: true)
             end
           end
         end

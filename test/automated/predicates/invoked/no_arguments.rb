@@ -6,11 +6,11 @@ context "Predicates" do
       invocation = Controls::Invocation.example
 
       context "Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        record_invocation.record(invocation)
+        recorder.record(invocation)
 
-        detected = record_invocation.invoked?
+        detected = recorder.invoked?
 
         test "Detected" do
           assert(detected)
@@ -18,9 +18,9 @@ context "Predicates" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        detected = record_invocation.invoked?
+        detected = recorder.invoked?
 
         test "Not detected" do
           refute(detected)

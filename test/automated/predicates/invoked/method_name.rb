@@ -7,11 +7,11 @@ context "Predicates" do
 
       context "Recorded" do
         context "Matched Method Name" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
+          recorder.record(invocation)
 
-          detected = record_invocation.invoked?(invocation.method_name)
+          detected = recorder.invoked?(invocation.method_name)
 
           test "Detected" do
             assert(detected)
@@ -19,11 +19,11 @@ context "Predicates" do
         end
 
         context "Mismatched Method Name" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
+          recorder.record(invocation)
 
-          detected = record_invocation.invoked?(SecureRandom.hex)
+          detected = recorder.invoked?(SecureRandom.hex)
 
           test "Not detected" do
             refute(detected)
@@ -32,9 +32,9 @@ context "Predicates" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        detected = record_invocation.invoked?(invocation.method_name)
+        detected = recorder.invoked?(invocation.method_name)
 
         test "Not detected" do
           refute(detected)

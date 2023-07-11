@@ -10,15 +10,15 @@ context "Queries" do
       context "Recorded Multiple" do
         context "Matched Parameters" do
           context "One Parameter Match" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
-            record_invocation.record(invocation)
+            recorder.record(invocation)
+            recorder.record(invocation)
 
             method_name = invocation.method_name
             parameters = { some_parameter: 1 }
 
-            retrieved_invocations = record_invocation.invocations(method_name, **parameters)
+            retrieved_invocations = recorder.invocations(method_name, **parameters)
 
             context "Retrieved" do
               assert(retrieved_invocations.length == 2)
@@ -34,15 +34,15 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            record_invocation = Controls::Recorder.example
+            recorder = Controls::Recorder.example
 
-            record_invocation.record(invocation)
-            record_invocation.record(invocation)
+            recorder.record(invocation)
+            recorder.record(invocation)
 
             method_name = invocation.method_name
             parameters = { some_parameter: 1, some_other_parameter: 11 }
 
-            retrieved_invocations = record_invocation.invocations(method_name, **parameters)
+            retrieved_invocations = recorder.invocations(method_name, **parameters)
 
             context "Retrieved" do
               assert(retrieved_invocations.length == 2)
@@ -59,15 +59,15 @@ context "Queries" do
         end
 
         context "Mismatched Parameters" do
-          record_invocation = Controls::Recorder.example
+          recorder = Controls::Recorder.example
 
-          record_invocation.record(invocation)
-          record_invocation.record(invocation)
+          recorder.record(invocation)
+          recorder.record(invocation)
 
           method_name = invocation.method_name
           parameters = { some_parameter: SecureRandom.hex }
 
-          retrieved_invocations = record_invocation.invocations(method_name, **parameters)
+          retrieved_invocations = recorder.invocations(method_name, **parameters)
 
           test "Not Retrieved" do
             assert(retrieved_invocations.empty?)
@@ -76,12 +76,12 @@ context "Queries" do
       end
 
       context "None Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }
 
-        retrieved_invocations = record_invocation.invocations(method_name, **parameters)
+        retrieved_invocations = recorder.invocations(method_name, **parameters)
 
         test "Not retrieved" do
           assert(retrieved_invocations.empty?)

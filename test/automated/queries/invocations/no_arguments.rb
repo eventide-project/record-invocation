@@ -6,12 +6,12 @@ context "Query" do
       invocation = Controls::Invocation.example
 
       context "Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        record_invocation.record(invocation)
-        record_invocation.record(invocation)
+        recorder.record(invocation)
+        recorder.record(invocation)
 
-        retrieved_invocations = record_invocation.invocations
+        retrieved_invocations = recorder.invocations
 
         test "All retrieved" do
           assert(retrieved_invocations == [invocation, invocation])
@@ -19,9 +19,9 @@ context "Query" do
       end
 
       context "Not Recorded" do
-        record_invocation = Controls::Recorder.example
+        recorder = Controls::Recorder.example
 
-        retrieved_invocations = record_invocation.invocations
+        retrieved_invocations = recorder.invocations
 
         test "Not retrieved" do
           assert(retrieved_invocations.empty?)
