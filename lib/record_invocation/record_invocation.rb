@@ -102,10 +102,6 @@ module RecordInvocation
   module Recorded
     def recorded_macro(method_name, &implementation)
 
-pp "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-pp implementation.parameters
-
-
       define_method(method_name) do |*args, **kwargs|
         record_invocation(binding)
         implementation.call(*args, **kwargs)
