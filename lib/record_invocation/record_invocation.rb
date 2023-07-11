@@ -1,6 +1,12 @@
 module RecordInvocation
   Error = ::Class.new(RuntimeError)
 
+  def self.included(cls)
+    cls.class_exec do
+      extend Recorded
+    end
+  end
+
   def __records
     @__records ||= []
   end
@@ -92,4 +98,14 @@ module RecordInvocation
     __invoked?(method_name, **parameters)
   end
   alias :invoked_once? :__invoked_once?
+
+  module Recorded
+    def recorded_macro(method_name, &implementation)
+      define_method(method_name) do
+        record_invocation(binding)
+        implementation.call
+      end
+    end
+    alias :recorded :recorded_macro
+  end
 end
