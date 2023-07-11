@@ -114,42 +114,27 @@ module RecordInvocation
       record_module.define_method(method_name) do |*args, **kwargs, &block|
         parameters = method(method_name).super_method.parameters
 
+        positional_arguments = args.dup
+        keyword_arguments = kwargs.dup
+
         arguments = {}
-        parameters.each_with_index do |(type, name), index|
-pp "#{type.inspect}: #{name.inspect}"
+
+        parameters.each do |type, name|
           case type
-          when :req, :opt, :rest
-            if index <= args.length
-              arguments[name] = args[index]
+          when :req, :opt
+            if positional_arguments.any?
+              arguments[name] = positional_arguments.shift
             end
-          when :key, :keyreq, :keyrest
-            if kwargs.key?(name)
-              arguments[name] = kwargs[name]
-            end
-
-
-=begin
           when :rest
-            # if name == :*
-            #   return "*"
-            # else
-            #   return "*#{name}"
-            # end
+            if positional_arguments.any?
+              arguments[name] = positional_arguments
+            end
+          when :key, :keyreq
+            if keyword_arguments.key?(name)
+              arguments[name] = keyword_arguments.delete(name)
+            end
           when :keyrest
-            if name == :**
-              return "**"
-            else
-              return "**#{name}"
-            end
-          when :block
-            if name == :&
-              return "&"
-            else
-              return "&#{name}"
-            end
-=end
-
-
+            arguments[name] = keyword_arguments
           when :block
             if not block.nil?
               arguments[name] = block
