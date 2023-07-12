@@ -4,8 +4,6 @@ context "Queries" do
   context "Invocations" do
     context "By Method Name and Parameters" do
       invocation = RecordInvocation::Controls::Invocation.example
-      ## Not used - Antoine, Sun Jul 9 2023
-      # other_invocation = RecordInvocation::Controls::Invocation.other_example
 
       context "Recorded Multiple" do
         context "Matched Parameters" do
