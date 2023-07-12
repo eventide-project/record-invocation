@@ -1,4 +1,4 @@
-require_relative 'automated_init'
+require_relative '../automated_init'
 
 context "Record Macro" do
   recorder = RecordInvocation::Controls::Recorder.example
@@ -45,7 +45,7 @@ context "Record Macro" do
         :some_multiple_assignment_keyword_parameter => :some_multiple_assignment_keyword_value,
         :some_other_multiple_assignment_keyword_parameter => :some_other_multiple_assignment_keyword_value
       },
-      :some_block => RecordInvocation::Controls::Recorder::Example.some_block
+      :some_block => control_block
     }
 
     context "Arguments" do
