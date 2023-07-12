@@ -8,7 +8,7 @@ context "Record Binding" do
   invocation = recorder.records[0]
   recorded = invocation.method_name == :some_method
 
-  comment "Records: #{recorder.records.pretty_inspect}"
+  detail "Records: #{recorder.records.pretty_inspect}"
 
   context "Invocation" do
     test "Recorded" do

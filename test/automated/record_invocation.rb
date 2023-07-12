@@ -7,7 +7,7 @@ context "Record Invocation" do
 
   recorder.record(invocation)
 
-  comment "Records: #{recorder.records.pretty_inspect}"
+  detail "Records: #{recorder.records.pretty_inspect}"
 
   context "Invocation" do
     test "Recorded" do

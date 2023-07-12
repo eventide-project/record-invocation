@@ -20,6 +20,10 @@ module RecordInvocation
           :some_result
         end
 
+        def self.some_block
+          @some_block ||= Proc.new {}
+        end
+
         def some_method
           record_invocation(binding)
         end
