@@ -1,7 +1,7 @@
 require_relative 'automated_init'
 
 context "Record Binding" do
-  recorder = Controls::Recorder.example
+  recorder = RecordInvocation::Controls::Recorder.example
 
   recorder.some_method
 

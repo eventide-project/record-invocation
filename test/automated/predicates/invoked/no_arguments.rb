@@ -3,10 +3,10 @@ require_relative '../../automated_init'
 context "Predicates" do
   context "Invoked" do
     context "No Arguments" do
-      invocation = Controls::Invocation.example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         recorder.record(invocation)
 
@@ -18,7 +18,7 @@ context "Predicates" do
       end
 
       context "Not Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         detected = recorder.invoked?
 

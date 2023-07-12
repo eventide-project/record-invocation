@@ -3,12 +3,12 @@ require_relative '../../automated_init'
 context "Queries" do
   context "One Invocation" do
     context "By Method Name" do
-      invocation = Controls::Invocation.example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Recorded" do
         context "Matched Method Name" do
           context "One Recorded" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
 
@@ -20,7 +20,7 @@ context "Queries" do
           end
 
           context "Multiple Recorded" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(invocation)
@@ -34,7 +34,7 @@ context "Queries" do
         end
 
         context "Mismatched" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
 
@@ -47,7 +47,7 @@ context "Queries" do
       end
 
       context "Not Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         retrieved_invocation = recorder.one_invocation(SecureRandom.hex)
 

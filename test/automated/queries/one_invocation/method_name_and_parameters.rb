@@ -3,12 +3,12 @@ require_relative '../../automated_init'
 context "Queries" do
   context "One Invocation" do
     context "By Method Name and Parameters" do
-      invocation = Controls::Invocation.example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Recorded One" do
         context "Matched Parameters" do
           context "One Parameter Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
 
@@ -23,7 +23,7 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
 
@@ -39,7 +39,7 @@ context "Queries" do
         end
 
         context "Mismatched Parameters" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
 
@@ -57,7 +57,7 @@ context "Queries" do
       context "Recorded Multiple" do
         context "Matched Parameters" do
           context "One Parameter Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(invocation)
@@ -73,7 +73,7 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(invocation)
@@ -91,7 +91,7 @@ context "Queries" do
       end
 
       context "Not Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }

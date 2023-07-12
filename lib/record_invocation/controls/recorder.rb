@@ -6,16 +6,15 @@ module RecordInvocation
       end
 
       class Example
-        # include ::RecordInvocation
+        include ::RecordInvocation
 
-        # record
-        def some_recorded_method(
+        record def some_recorded_method(
           some_parameter,
           some_optional_paramter=nil,
-          *,
+          *some_multiple_assignment_parameter,
           some_keyword_parameter:,
           some_optional_keyword_parameter: nil,
-          **,
+          **some_multiple_assignment_keyword_parameter,
           &some_block
         )
           :some_result
@@ -24,18 +23,6 @@ module RecordInvocation
         def some_method
           record_invocation(binding)
         end
-
-        # RecordInvocation
-        # mimic
-        # <---
-        # RecordInvocation::Record (customizable one)
-        # Substitute (extended)
-
-        # module Substitute
-        #   def some_method
-        #     "arisetnrs"
-        #   end
-        # end
       end
     end
   end
