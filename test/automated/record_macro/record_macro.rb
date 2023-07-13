@@ -20,9 +20,9 @@ context "Record Macro" do
   invocation = recorder.records[0]
 
   detail "Result: #{result.inspect}"
-  detail "Records: #{recorder.records.pretty_inspect}"
+  detail "Invocation: #{invocation.pretty_inspect}"
 
-  test "Result" do
+  test "Result is preserved" do
     assert(result == :some_result)
   end
 
