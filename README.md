@@ -1,6 +1,6 @@
 # record_invocation
 
-Record method invocations, query method invocations, and use predicates to verify a method's invocations for an object
+Record method invocations, query method invocations, and use predicates to verify a method's invocation
 
 <!-- Review the use of `recorder` in the examples - Antoine, Mon Jul 10 2023 -->
 

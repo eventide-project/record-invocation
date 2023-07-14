@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'evt-record_invocation'
-  s.summary = ''
+  s.summary = "Record method invocations, query method invocations, and use predicates to verify a method's invocation"
   s.version = '0.0.0.0'
   s.description = ' '
 
