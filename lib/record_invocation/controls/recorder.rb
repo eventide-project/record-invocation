@@ -15,23 +15,11 @@ module RecordInvocation
 
       module RecordMacro
         def self.example
-          Example.build(some_block)
-        end
-
-        def self.some_block
-          @some_block ||= Proc.new {}
+          Example.new
         end
 
         class Example
           include ::RecordInvocation
-
-          attr_accessor :some_block
-
-          def self.build(some_block)
-            instance = new
-            instance.some_block = some_block
-            instance
-          end
 
           record def some_recorded_method(
             some_parameter,
@@ -48,23 +36,11 @@ module RecordInvocation
 
         module UnnamedParameters
           def self.example
-            Example.build(some_block)
-          end
-
-          def self.some_block
-            @some_block ||= Proc.new {}
+            Example.new
           end
 
           class Example
             include ::RecordInvocation
-
-            attr_accessor :some_block
-
-            def self.build(some_block)
-              instance = new
-              instance.some_block = some_block
-              instance
-            end
 
             record def some_recorded_method(
               *,

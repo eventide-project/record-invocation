@@ -4,7 +4,7 @@ context "Record Macro" do
   context "Unnamed Parameters" do
     recorder = RecordInvocation::Controls::Recorder::RecordMacro::UnnamedParameters.example
 
-    control_block = RecordInvocation::Controls::Recorder::RecordMacro::UnnamedParameters.some_block
+    control_block = proc { }
 
     recorder.some_recorded_method(
       :some_multiple_assignment_arg,
