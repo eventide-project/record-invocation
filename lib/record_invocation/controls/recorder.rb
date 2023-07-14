@@ -63,7 +63,6 @@ module RecordInvocation
             **,
             &
           )
-            :some_result
           end
         end
       end
