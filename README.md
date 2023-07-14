@@ -2,8 +2,6 @@
 
 Record method invocations, query method invocations, and use predicates to verify a method's invocation
 
-<!-- Review the use of `recorder` in the examples - Antoine, Mon Jul 10 2023 -->
-
 ## Example
 
 ``` ruby
@@ -12,6 +10,10 @@ class SomeClass
 
   def some_method(some_parameter)
     record_invocation(binding)
+  end
+
+  record def some_recorded_method(some_parameter)
+    :some_result
   end
 end
 
@@ -27,16 +29,14 @@ recorder.invocation(:some_method)
  @method_name=:some_method, 
  @parameters={:some_parameter=>"some argument"}>
 
-some_invocation = Invocation.new(:some_other_method, { some_parameter: 'some argument' })
-recorder.record(some_invocation)
+## Recorded method
 
-recorder.invoked?(:some_other_method)
-# => true
+recorder.some_recorded_method('some argument')
+# => :some_result
 
-recorder.invocation(:some_other_method)
-# => <Invocation:0x.. 
- @method_name=:some_other_method, 
- @parameters={:some_parameter=>"some argument"}>
+
+
+
 ```
 
 ## Recording Invocations of an Object
