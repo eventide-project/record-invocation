@@ -3,11 +3,11 @@ require_relative '../../automated_init'
 context "Queries" do
   context "Invocation" do
     context "Multiple Detected" do
-      invocation = Controls::Invocation.example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Strict" do
         context "By Method Name" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
           recorder.record(invocation)
@@ -20,7 +20,7 @@ context "Queries" do
         end
 
         context "By Parameters" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
           recorder.record(invocation)

@@ -3,11 +3,11 @@ require_relative '../../automated_init'
 context "Predicates" do
   context "Invoked" do
     context "By Method Name" do
-      invocation = Controls::Invocation.example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Recorded" do
         context "Matched Method Name" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
 
@@ -19,7 +19,7 @@ context "Predicates" do
         end
 
         context "Mismatched Method Name" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
 
@@ -32,7 +32,7 @@ context "Predicates" do
       end
 
       context "Not Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         detected = recorder.invoked?(invocation.method_name)
 

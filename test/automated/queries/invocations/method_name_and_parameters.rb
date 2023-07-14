@@ -3,14 +3,12 @@ require_relative '../../automated_init'
 context "Queries" do
   context "Invocations" do
     context "By Method Name and Parameters" do
-      invocation = Controls::Invocation.example
-      ## Not used - Antoine, Sun Jul 9 2023
-      # other_invocation = Controls::Invocation.other_example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Recorded Multiple" do
         context "Matched Parameters" do
           context "One Parameter Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(invocation)
@@ -34,7 +32,7 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(invocation)
@@ -59,7 +57,7 @@ context "Queries" do
         end
 
         context "Mismatched Parameters" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
           recorder.record(invocation)
@@ -76,7 +74,7 @@ context "Queries" do
       end
 
       context "None Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }

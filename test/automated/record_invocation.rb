@@ -1,9 +1,9 @@
 require_relative 'automated_init'
 
 context "Record Invocation" do
-  recorder = Controls::Recorder.example
+  recorder = RecordInvocation::Controls::Recorder.example
 
-  invocation = Controls::Invocation.example
+  invocation = RecordInvocation::Controls::Invocation.example
 
   recorder.record(invocation)
 

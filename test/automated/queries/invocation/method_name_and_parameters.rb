@@ -3,12 +3,12 @@ require_relative '../../automated_init'
 context "Queries" do
   context "Invocation" do
     context "By Method Name and Parameters" do
-      invocation = Controls::Invocation.example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Recorded One" do
         context "Matched Parameters" do
           context "One Parameter Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
 
@@ -23,7 +23,7 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
 
@@ -40,11 +40,11 @@ context "Queries" do
       end
 
       context "Recorded Multiple" do
-        other_invocation = Controls::Invocation.example
+        other_invocation = RecordInvocation::Controls::Invocation.example
 
         context "Matched Parameters" do
           context "One Parameter Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(other_invocation)
@@ -60,7 +60,7 @@ context "Queries" do
           end
 
           context "Multiple Parameters Match" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(other_invocation)
@@ -79,7 +79,7 @@ context "Queries" do
 
       context "Recorded" do
         context "No Parameters Match" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
 
@@ -95,7 +95,7 @@ context "Queries" do
       end
 
       context "Not Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }

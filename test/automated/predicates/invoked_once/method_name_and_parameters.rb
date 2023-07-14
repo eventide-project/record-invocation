@@ -3,13 +3,13 @@ require_relative '../../automated_init'
 context "Predicate" do
   context "Invoked Once" do
     context "By Method Name and Parameters" do
-      invocation = Controls::Invocation.example
+      invocation = RecordInvocation::Controls::Invocation.example
 
       context "Recorded" do
         context "Matched Parameters" do
           context "One Recorded" do
             context "One Parameter Match" do
-              recorder = Controls::Recorder.example
+              recorder = RecordInvocation::Controls::Recorder.example
 
               recorder.record(invocation)
 
@@ -28,7 +28,7 @@ context "Predicate" do
             end
 
             context "Multiple Parameters Match" do
-              recorder = Controls::Recorder.example
+              recorder = RecordInvocation::Controls::Recorder.example
 
               recorder.record(invocation)
 
@@ -48,7 +48,7 @@ context "Predicate" do
           end
 
           context "Multiple Recorded" do
-            recorder = Controls::Recorder.example
+            recorder = RecordInvocation::Controls::Recorder.example
 
             recorder.record(invocation)
             recorder.record(invocation)
@@ -69,7 +69,7 @@ context "Predicate" do
         end
 
         context "Mismatched Parameters" do
-          recorder = Controls::Recorder.example
+          recorder = RecordInvocation::Controls::Recorder.example
 
           recorder.record(invocation)
 
@@ -89,7 +89,7 @@ context "Predicate" do
       end
 
       context "Not Recorded" do
-        recorder = Controls::Recorder.example
+        recorder = RecordInvocation::Controls::Recorder.example
 
         method_name = invocation.method_name
         parameters = { some_parameter: 1 }
