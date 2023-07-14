@@ -1,10 +1,9 @@
 require_relative '../automated_init'
 
 context "Record Macro" do
-  recorder = RecordInvocation::Controls::Recorder.example
+  recorder = RecordInvocation::Controls::Recorder::RecordMacro.example
 
-  # control_block = RecordInvocation::Controls::Recorder::Example.some_block
-  control_block = RecordInvocation::Controls::Recorder.some_block
+  control_block = RecordInvocation::Controls::Recorder::RecordMacro.some_block
 
   result = recorder.some_recorded_method(
     :some_arg,
