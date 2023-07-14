@@ -2,9 +2,9 @@ require_relative '../automated_init'
 
 context "Record Macro" do
   context "Unnamed Parameters" do
-    recorder = RecordInvocation::Controls::Recorder::UnnamedParameters.example
+    recorder = RecordInvocation::Controls::Recorder::RecordMacro::UnnamedParameters.example
 
-    control_block = RecordInvocation::Controls::Recorder::UnnamedParameters.some_block
+    control_block = RecordInvocation::Controls::Recorder::RecordMacro::UnnamedParameters.some_block
 
     recorder.some_recorded_method(
       :some_multiple_assignment_arg,
