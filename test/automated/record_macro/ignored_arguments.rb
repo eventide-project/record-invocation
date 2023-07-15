@@ -1,8 +1,8 @@
 require_relative '../automated_init'
 
 context "Record Macro" do
-  context "Unnamed Parameters" do
-    recorder = RecordInvocation::Controls::Recorder::RecordMacro::UnnamedParameters.example
+  context "Ignored Parameters" do
+    recorder = RecordInvocation::Controls::Recorder::RecordMacro::IgnoredParameters.example
 
     control_block = proc { }
 

@@ -34,7 +34,7 @@ module RecordInvocation
           end
         end
 
-        module UnnamedParameters
+        module IgnoredParameters
           def self.example
             Example.new
           end
