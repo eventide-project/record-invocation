@@ -7,10 +7,10 @@ context "Record Macro" do
     control_block = proc { }
 
     recorder.some_recorded_method(
-      :some_multiple_assignment_arg,
-      :some_other_multiple_assignment_arg,
-      some_multiple_assignment_keyword_parameter: :some_multiple_assignment_keyword_value,
-      some_other_multiple_assignment_keyword_parameter: :some_other_multiple_assignment_keyword_value,
+      :some_ignored_arg,
+      :some_other_ignored_arg,
+      some_ignored_keyword_parameter: :some_ignored_keyword_arg,
+      some_other_ignored_keyword_parameter: :some_other_ignored_keyword_arg,
       &control_block
     )
 
@@ -25,25 +25,33 @@ context "Record Macro" do
         assert(recorded)
       end
 
-      control_arguments = {
-        :* => [
-          :some_multiple_assignment_arg, :some_other_multiple_assignment_arg
-        ],
-        :** => {
-          :some_multiple_assignment_keyword_parameter => :some_multiple_assignment_keyword_value,
-          :some_other_multiple_assignment_keyword_parameter => :some_other_multiple_assignment_keyword_value
-        },
-        :& => control_block
-      }
-
       context "Arguments" do
-        control_arguments.each do |name, value|
-          arg = { name => value }
+        arguments = invocation.arguments
 
-          invoked = recorder.invoked?(:some_recorded_method, **arg)
+        context "Ignored" do
+          value = invocation.arguments[:*]
 
-          test "#{name.inspect} => #{value.inspect}" do
-            assert(invoked)
+          test "Value" do
+            assert(value == [:some_ignored_arg, :some_other_ignored_arg])
+          end
+        end
+
+        context "Ignored Keyword Parameters" do
+          value = invocation.arguments[:**]
+
+          test "Value" do
+            assert(value == {
+              some_ignored_keyword_parameter: :some_ignored_keyword_arg,
+              some_other_ignored_keyword_parameter: :some_other_ignored_keyword_arg
+             })
+          end
+        end
+
+        context "Block" do
+          value = invocation.arguments[:&]
+
+          test "Value" do
+            assert(value == control_block)
           end
         end
       end

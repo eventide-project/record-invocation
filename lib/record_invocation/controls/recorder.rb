@@ -23,7 +23,7 @@ module RecordInvocation
 
           record def some_recorded_method(
             some_parameter,
-            some_optional_paramter=nil,
+            some_optional_parameter=nil,
             *some_multiple_assignment_parameter,
             some_keyword_parameter:,
             some_optional_keyword_parameter: nil,
