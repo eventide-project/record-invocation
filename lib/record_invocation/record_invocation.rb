@@ -29,8 +29,8 @@ module RecordInvocation
   alias :record_invocation :__record_invocation
 
   def __invocation(method_name, **parameters)
-    strict = parameters.delete(:strict)
-    strict ||= false
+    once = parameters.delete(:once)
+    once ||= false
 
     invocations = __invocations(method_name, **parameters)
 
@@ -38,7 +38,7 @@ module RecordInvocation
       return nil
     end
 
-    if strict && invocations.length > 1
+    if once && invocations.length > 1
       raise Error, "More than one invocation record matches (Method Name: #{method_name.inspect}, Parameters: #{parameters.inspect})"
     end
 
@@ -47,7 +47,7 @@ module RecordInvocation
   alias :invocation :__invocation
 
   def __one_invocation(method_name, **parameters)
-    parameters[:strict] = true
+    parameters[:once] = true
     __invocation(method_name, **parameters)
   end
   alias :one_invocation :__one_invocation
@@ -84,8 +84,8 @@ module RecordInvocation
       return !__records.empty?
     end
 
-    if not parameters.key?(:strict)
-      parameters[:strict] = false
+    if not parameters.key?(:once)
+      parameters[:once] = false
     end
 
     invocation = __invocation(method_name, **parameters)
@@ -94,7 +94,7 @@ module RecordInvocation
   alias :invoked? :__invoked?
 
   def __invoked_once?(method_name, **parameters)
-    parameters[:strict] = true
+    parameters[:once] = true
     __invoked?(method_name, **parameters)
   end
   alias :invoked_once? :__invoked_once?
