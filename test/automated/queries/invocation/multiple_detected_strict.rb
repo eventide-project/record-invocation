@@ -14,7 +14,7 @@ context "Queries" do
 
           test "Is an error" do
             assert_raises(RecordInvocation::Error) do
-              recorder.invocation(invocation.method_name, strict: true)
+              recorder.invocation(invocation.method_name, once: true)
             end
           end
         end
@@ -27,7 +27,7 @@ context "Queries" do
 
           test "Is an error" do
             assert_raises(RecordInvocation::Error) do
-              recorder.invocation(invocation.method_name, some_parameter: 1, strict: true)
+              recorder.invocation(invocation.method_name, some_parameter: 1, once: true)
             end
           end
         end
