@@ -1,6 +1,6 @@
 # record_invocation
 
-Record method invocations, query method invocations, and use predicates to verify a method's invocation
+Record method invocations, query the invocations, and use predicates to verify a method's invocation
 
 ## Example
 
@@ -29,14 +29,18 @@ recorder.invocation(:some_method)
  @method_name=:some_method, 
  @parameters={:some_parameter=>"some argument"}>
 
-## Recorded method
+# Recorded method
 
-recorder.some_recorded_method('some argument')
+recorder.some_recorded_method('some other argument')
 # => :some_result
 
+recorder.invoked?(:some_recorded_method)
+# => true
 
-
-
+recorder.invocation(:some_recorded_method)
+# => <Invocation:0x..
+ @method_name=:some_recorded_method,
+ @parameters={:some_parameter=>"some other argument"}>
 ```
 
 ## Recording Invocations of an Object
@@ -49,7 +53,9 @@ class SomeClass
 end
 ```
 
-Invocations can be recorded by passing the current execution context.
+### The `record_invocation` Method
+
+Invocations can be recorded by passing the current binding to the `record_invocation` method.
 
 ``` ruby
 class SomeClass
@@ -70,23 +76,47 @@ recorder.invocation(:some_method)
  @parameters={:some_parameter=>"some argument", :some_other_parameter=>"some other argument"}>
 ```
 
-Invocations can also be recorded by passing an `Invocation` object to the recorder.
+### The `record` Macro
+
+The `record` macro allows any method to be recorded. The method's implementation doesn't have to be specialized in any way, and the method's natural behavior and return value are unchanged.
 
 ``` ruby
-invocation = Invocation.new(:some_method, { some_parameter: 'some argument', some_other_parameter: 'some other argument' })
+class SomeClass
+  include RecordInvocation
 
-recorder.record(invocation)
+  record def some_recorded_method(some_parameter)
+    :some_result
+  end
+end
+
+recorder = SomeClass.new
+
+recorder.some_recorded_method('some other argument')
+# => :some_result
+
+recorder.invoked?(:some_recorded_method)
+# => true
+
+recorder.invocation(:some_recorded_method)
+# => <Invocation:0x..
+ @method_name=:some_recorded_method,
+ @parameters={:some_parameter=>"some other argument"}>
+
+## Querying Invocations
+
+An invocation can be retrieved based on its method name and parameter values.
+
+### By Method Name
+
+``` ruby
+recorder.some_method('some argument', 'some other argument')
 
 recorder.invocation(:some_method)
 # => #<Invocation:0x...
  @method_name=:some_method,
  @parameters={:some_parameter=>"some argument", :some_other_parameter=>"some other argument"}>
-```
 
-The invocation can be retrieved based on parameter values.
-
-``` ruby
-recorder.some_method('some argument', 'some other argument')
+### By Method Name and Parameter Values
 
 recorder.invocation(:some_method, some_parameter: 'some argument')
 # => #<Invocation:0x...
@@ -104,9 +134,11 @@ recorder.invocation(:some_method, some_parameter: 'some argument', some_other_pa
  @parameters={:some_parameter=>"some argument", :some_other_parameter=>"some other argument"}>
 ```
 
-If more than one invocation is found, only the first invocation will be returned.
+### Assuring Exactly One Invocation
 
-If a method should have only been invoked once, the `one_invocation` method will raise an error rather than return the first invocation.
+If more than one invocation is found, only the first invocation will be returned using the `invocation` method.
+
+If a method should have only been invoked once, the `one_invocation` method will raise an error rather than return the first invocation in cases where the method was invoked more than once.
 
 ``` ruby
 recorder.some_method('some argument', 'some other argument')
@@ -129,6 +161,8 @@ recorder.one_invocation(:some_method, some_parameter: 'some argument')
  @method_name=:some_method,
  @parameters={:some_parameter=>"some argument", :some_other_parameter=>"some other argument"}>
 ```
+
+### Retrieving More than One Invocation
 
 If a method is invoked more than once, multiple invocation records can be retrieved.
 
@@ -163,6 +197,8 @@ recorder.invocations(:some_method, some_parameter: 'some argument', some_other_p
   @parameters={:some_parameter=>"some argument", :some_other_parameter=>"some other argument"}>]
 ```
 
+## Detecting Invocations
+
 `RecordInvocation` provides predicates for detecting whether an invocation has been made.
 
 ``` ruby
@@ -184,6 +220,8 @@ recorder.invoked?(:some_method, some_parameter: 'some argument', some_other_para
 # => true
 ```
 
+### Detecting Exactly One Invocation
+
 If a method should have only been invoked once, the `invoked_once?` predicate will raise an error if more than one matching invocation is detected.
 
 ``` ruby
@@ -197,7 +235,7 @@ recorder.invoked_once?(:some_method, some_parameter: 'some argument')
 # => More than one invocation record matches (Method Name: :some_method, Parameters: {:some_parameter=>"some argument"}) (RecordInvocation::Error)
 ```
 
-If only one invocation of the method was recorded, then the predicate will respond affirmatively.
+If only one invocation of the method was recorded, then the `invoked?` predicate will respond affirmatively.
 
 ``` ruby
 recorder.some_method('some argument', 'some other argument')
@@ -212,3 +250,5 @@ The methods of the recorder may conflict with the methods implemented on the `Re
 - __invocations
 - __invoked?
 - __invoked_once?
+- __record_invocation
+
