@@ -1,6 +1,6 @@
 # record_invocation
 
-Record method invocations, query method invocations, and use predicates to verify a method's invocation
+Record method invocations, query the invocations, and use predicates to verify a method's invocation
 
 ## Example
 
@@ -31,12 +31,16 @@ recorder.invocation(:some_method)
 
 ## Recorded method
 
-recorder.some_recorded_method('some argument')
+recorder.some_recorded_method('some other argument')
 # => :some_result
 
+recorder.invoked?(:some_recorded_method)
+# => true
 
-
-
+recorder.invocation(:some_recorded_method)
+# => <Invocation:0x..
+ @method_name=:some_recorded_method,
+ @parameters={:some_parameter=>"some other argument"}>
 ```
 
 ## Recording Invocations of an Object
@@ -49,7 +53,7 @@ class SomeClass
 end
 ```
 
-Invocations can be recorded by passing the current execution context.
+Invocations can be recorded by passing the current binding to the `record_invocation` method.
 
 ``` ruby
 class SomeClass
@@ -70,20 +74,7 @@ recorder.invocation(:some_method)
  @parameters={:some_parameter=>"some argument", :some_other_parameter=>"some other argument"}>
 ```
 
-Invocations can also be recorded by passing an `Invocation` object to the recorder.
-
-``` ruby
-invocation = Invocation.new(:some_method, { some_parameter: 'some argument', some_other_parameter: 'some other argument' })
-
-recorder.record(invocation)
-
-recorder.invocation(:some_method)
-# => #<Invocation:0x...
- @method_name=:some_method,
- @parameters={:some_parameter=>"some argument", :some_other_parameter=>"some other argument"}>
-```
-
-The invocation can be retrieved based on parameter values.
+An invocation can be retrieved based on its parameter values.
 
 ``` ruby
 recorder.some_method('some argument', 'some other argument')
