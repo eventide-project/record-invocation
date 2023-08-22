@@ -65,25 +65,19 @@ module RecordInvocation
   alias :one_invocation :__one_invocation
 
   def __invocations(method_name=nil, **parameters)
-    if method_name.nil? && parameters.empty?
-      return __records
+    invocations = __records
+
+    if not method_name.nil?
+      invocations = invocations.select { |invocation| invocation.method_name == method_name }
     end
 
-    invocations = __records.select { |invocation| invocation.method_name == method_name }
+    if not parameters.empty?
+      invocations = invocations.select do |invocation|
+        parameters.all? do |match_parameter_name, match_parameter_value|
+          invocation_value = invocation.arguments[match_parameter_name]
 
-    if parameters.nil?
-      return invocations
-    end
-
-    if invocations.empty?
-      return []
-    end
-
-    invocations = invocations.select do |invocation|
-      parameters.all? do |match_parameter_name, match_parameter_value|
-        invocation_value = invocation.arguments[match_parameter_name]
-
-        invocation_value == match_parameter_value
+          invocation_value == match_parameter_value
+        end
       end
     end
 
