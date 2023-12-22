@@ -31,7 +31,7 @@ module RecordInvocation
             **some_multiple_assignment_keyword_parameter,
             &some_block
           )
-            ::Invocation.build(binding)
+            ::Invocation.reflect(binding)
           end
         end
       end
@@ -44,7 +44,7 @@ module RecordInvocation
 
         class Example
           def some_method
-            ::Invocation.build(binding)
+            ::Invocation.reflect(binding)
           end
         end
       end
