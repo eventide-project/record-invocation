@@ -20,7 +20,7 @@ module RecordInvocation
 
   def __record_invocation(invocation_or_binding)
     if invocation_or_binding.is_a?(Binding)
-      invocation = Invocation.build(invocation_or_binding)
+      invocation = Invocation.reflect(invocation_or_binding)
     end
 
     __record(invocation)
