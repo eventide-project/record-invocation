@@ -29,7 +29,7 @@ context "Record Macro" do
         arguments = invocation.arguments
 
         context "Ignored" do
-          value = invocation.arguments[:*]
+          value = arguments[:*]
 
           test "Value" do
             assert(value == [:some_ignored_arg, :some_other_ignored_arg])
@@ -37,7 +37,7 @@ context "Record Macro" do
         end
 
         context "Ignored Keyword Parameters" do
-          value = invocation.arguments[:**]
+          value = arguments[:**]
 
           test "Value" do
             assert(value == {
@@ -48,7 +48,7 @@ context "Record Macro" do
         end
 
         context "Block" do
-          value = invocation.arguments[:&]
+          value = arguments[:&]
 
           test "Value" do
             assert(value == control_block)
