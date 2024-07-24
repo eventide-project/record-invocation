@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.name = 'evt-record_invocation'
   s.summary = "Record method invocations, query the invocations, and use predicates to verify a method's invocation"
-  s.version = '2.0.0.0'
+  s.version = '2.0.1.0'
   s.description = ' '
 
   s.authors = ['The Eventide Project']
