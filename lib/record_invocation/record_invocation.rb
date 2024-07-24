@@ -7,6 +7,18 @@ module RecordInvocation
     end
   end
 
+  def self.call(object, method, *methods)
+    methods = [method, *methods]
+
+    object.singleton_class.class_exec do
+      include RecordInvocation
+
+      methods.each do |method|
+        record method
+      end
+    end
+  end
+
   def __records
     @__records ||= []
   end
