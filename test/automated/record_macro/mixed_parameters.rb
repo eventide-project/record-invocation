@@ -54,7 +54,7 @@ context "Record Macro" do
         end
 
         context "Multiple Assignment" do
-          value = invocation.arguments[:some_multiple_assignment_parameter]
+          value = arguments[:some_multiple_assignment_parameter]
 
           test "Value" do
             assert(value == [:some_multiple_assignment_arg, :some_other_multiple_assignment_arg])
@@ -62,7 +62,7 @@ context "Record Macro" do
         end
 
         context "Keyword" do
-          value = invocation.arguments[:some_keyword_parameter]
+          value = arguments[:some_keyword_parameter]
 
           test "Value" do
             assert(value == :some_keyword_arg)
@@ -70,7 +70,7 @@ context "Record Macro" do
         end
 
         context "Optional Keyword" do
-          value = invocation.arguments[:some_optional_keyword_parameter]
+          value = arguments[:some_optional_keyword_parameter]
 
           test "Value" do
             assert(value == :some_optional_keyword_arg)
@@ -78,7 +78,7 @@ context "Record Macro" do
         end
 
         context "Multiple Assignment Keyword Parameters" do
-          value = invocation.arguments[:some_multiple_assignment_keyword_parameter]
+          value = arguments[:some_multiple_assignment_keyword_parameter]
 
           test "Value" do
             assert(value == {
@@ -89,7 +89,7 @@ context "Record Macro" do
         end
 
         context "Block" do
-          value = invocation.arguments[:some_block]
+          value = arguments[:some_block]
 
           test "Value" do
             assert(value == control_block)
