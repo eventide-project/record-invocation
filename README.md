@@ -101,6 +101,7 @@ recorder.invocation(:some_recorded_method)
 # => <Invocation:0x..
  @method_name=:some_recorded_method,
  @parameters={:some_parameter=>"some other argument"}>
+```
 
 ## Querying Invocations
 
