@@ -1,3 +1,3 @@
-require_relative './load_path'
+require_relative "./load_path"
 
-require 'record_invocation'
+require "record_invocation"

@@ -1,4 +1,4 @@
-require_relative '../automated_init'
+require_relative "../automated_init"
 
 context "Record Macro" do
   context "Ignored Parameters" do
