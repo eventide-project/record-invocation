@@ -1,4 +1,4 @@
-require_relative '../../automated_init'
+require_relative "../../automated_init"
 
 context "Queries" do
   context "Invocation" do
