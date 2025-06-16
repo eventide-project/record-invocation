@@ -134,11 +134,11 @@ module RecordInvocation
         parameters.each do |type, name|
           case type
           when :req, :opt
-            if positional_arguments.any?
+            if !positional_arguments.empty?
               arguments[name] = positional_arguments.shift
             end
           when :rest
-            if positional_arguments.any?
+            if !positional_arguments.empty?
               arguments[name] = positional_arguments
             end
           when :key, :keyreq
